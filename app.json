@@ -1,0 +1,101 @@
+{
+  "id": "com.anders.airport-airplay-detector",
+  "version": "1.0.0",
+  "compatibility": ">=10.0.0",
+  "sdk": 3,
+  "platforms": ["local"],
+  "name": { "en": "AirPort Express", "sv": "AirPort Express" },
+  "description": {
+    "en": "Let your classic AirPort Express trigger the right audio path automatically.",
+    "sv": "Låt din klassiska AirPort Express automatiskt välja rätt ljudväg."
+  },
+  "category": ["tools"],
+  "tags": {
+    "en": ["AirPort Express", "AirPlay", "Audio", "Automation"],
+    "sv": ["AirPort Express", "AirPlay", "Ljud", "Automation"]
+  },
+  "brandColor": "#39BFE8",
+  "author": { "name": "Anders" },
+  "homepage": "https://github.com/Androoz/homey-airport-airplay-detector",
+  "support": "https://github.com/Androoz/homey-airport-airplay-detector/issues",
+  "source": "https://github.com/Androoz/homey-airport-airplay-detector",
+  "bugs": {
+    "url": "https://github.com/Androoz/homey-airport-airplay-detector/issues"
+  },
+  "contributors": {
+    "developers": [
+      { "name": "maxileith" },
+      { "name": "djerik" }
+    ]
+  },
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "capabilities": {
+    "airplay_active": {
+      "type": "boolean",
+      "title": { "en": "AirPlay active", "sv": "AirPlay aktivt" },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    }
+  },
+  "discovery": {
+    "airport-raop": {
+      "type": "mdns-sd",
+      "mdns-sd": { "name": "raop", "protocol": "tcp" },
+      "id": "{{name}}"
+    },
+    "airport-airplay": {
+      "type": "mdns-sd",
+      "mdns-sd": { "name": "airplay", "protocol": "tcp" },
+      "id": "{{name}}",
+      "conditions": [
+        [
+          {
+            "field": "txt.model",
+            "match": { "type": "string", "value": "AirPort10,115" }
+          }
+        ]
+      ]
+    }
+  },
+  "drivers": [
+    {
+      "id": "airport-express",
+      "name": { "en": "AirPort Express", "sv": "AirPort Express" },
+      "class": "sensor",
+      "capabilities": ["airplay_active"],
+      "platforms": ["local"],
+      "connectivity": ["lan"],
+      "discovery": "airport-raop",
+      "images": {
+        "small": "/drivers/airport-express/assets/images/small.png",
+        "large": "/drivers/airport-express/assets/images/large.png",
+        "xlarge": "/drivers/airport-express/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": { "next": "add_devices" }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "triggers": [
+      { "id": "airplay_started", "title": { "en": "AirPlay started", "sv": "AirPlay startade" }, "args": [{ "name": "device", "type": "device", "filter": "driver_id=airport-express" }] },
+      { "id": "airplay_stopped", "title": { "en": "AirPlay stopped", "sv": "AirPlay stoppade" }, "args": [{ "name": "device", "type": "device", "filter": "driver_id=airport-express" }] }
+    ],
+    "conditions": [
+      { "id": "airplay_is_active", "title": { "en": "AirPlay is active", "sv": "AirPlay är aktivt" }, "args": [{ "name": "device", "type": "device", "filter": "driver_id=airport-express" }] }
+    ]
+  }
+}

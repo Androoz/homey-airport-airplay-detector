@@ -1,0 +1,16 @@
+.git/
+.github/
+.homeybuild/
+.pnpm-store/
+node_modules/
+assets/source/
+test/
+CHANGELOG.md
+COMMUNITY_POST.md
+CONTRIBUTING.md
+INSTALLATION.md
+NOTICE.md
+PUBLISHING.md
+README.md
+pnpm-lock.yaml
+pnpm-workspace*.yaml
