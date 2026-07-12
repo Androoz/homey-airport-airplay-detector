@@ -1,4 +1,4 @@
-# AirPort AirPlay Detector for Homey Pro
+# Airport Airplay Detector for Homey Pro
 
 I have created a local Homey Pro app for AirPort Express generation 2 (A1392). It detects when an AirPlay session connects or disconnects and makes the state available in Flow.
 

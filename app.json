@@ -4,7 +4,7 @@
   "compatibility": ">=10.0.0",
   "sdk": 3,
   "platforms": ["local"],
-  "name": { "en": "AirPort Express", "sv": "AirPort Express" },
+  "name": { "en": "Airport Airplay Detector", "sv": "Airport Airplay Detector" },
   "description": {
     "en": "Let your classic AirPort Express trigger the right audio path automatically.",
     "sv": "Låt din klassiska AirPort Express automatiskt välja rätt ljudväg."

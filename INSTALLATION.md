@@ -28,7 +28,7 @@ npx homey app run
 
 I Homey-appen:
 
-1. Öppna **Enheter**, tryck **+** och välj **AirPort AirPlay-detektor**.
+1. Öppna **Enheter**, tryck **+** och välj **Airport Airplay Detector**.
 2. Välj **AirPort Express** och lägg till din AirPort Express.
 3. Om den inte syns: kontrollera samma nät/VLAN, att Bonjour/mDNS inte blockeras och starta om AirPort Express.
 

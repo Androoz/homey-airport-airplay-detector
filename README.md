@@ -1,4 +1,4 @@
-# AirPort AirPlay Detector for Homey Pro
+# Airport Airplay Detector for Homey Pro
 
 An independent Homey SDK 3 app that detects active AirPlay sessions on AirPort Express generation 2 (A1392 / AirPort10,115). It makes session state available as a device capability and as Flow cards, allowing an amplifier such as a HEOS Amp to switch to its AirPort input automatically.
 
