@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a reproducible problem with the Homey app
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please remove private IP addresses, serial numbers and other sensitive data from logs.
+  - type: input
+    id: homey
+    attributes:
+      label: Homey Pro model and firmware
+    validations:
+      required: true
+  - type: input
+    id: airport
+    attributes:
+      label: AirPort Express model and firmware
+      placeholder: A1392, firmware 7.8.1
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant sanitized logs
+      render: shell
