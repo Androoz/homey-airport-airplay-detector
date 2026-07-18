@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — 2026-07-12
+## 1.0.0 — 2026-07-18
 
 - Initial public release.
 - Detects active AirPlay sessions on AirPort Express generation 2.
