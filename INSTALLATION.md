@@ -1,5 +1,17 @@
 # Installation på Homey Pro
 
+## Installera den publicerade versionen
+
+Installera **Airport Airplay Detector** från [Homey App Store](https://homey.app/a/com.anders.airport-airplay-detector). Detta är den rekommenderade installationsvägen och ger automatiska uppdateringar via Homey.
+
+I Homey-appen:
+
+1. Öppna **Enheter**, tryck **+** och sök efter **Airport Airplay Detector**.
+2. Välj **AirPort Express** och lägg till din AirPort Express.
+3. Om den inte syns: kontrollera att Homey Pro och AirPort Express finns på samma nät/VLAN och att Bonjour/mDNS inte blockeras.
+
+Resten av dokumentet beskriver utvecklingsinstallation från källkod.
+
 ## Förutsättningar
 
 - Homey Pro och AirPort Express måste finnas på samma lokala nät/VLAN där mDNS (Bonjour) kan passera.
@@ -26,7 +38,7 @@ npx homey app run
 
 `app run` installerar appen tillfälligt och visar loggen. Avslutar du kommandot avinstalleras testversionen.
 
-I Homey-appen:
+I Homey-appen för utvecklingsinstallationen:
 
 1. Öppna **Enheter**, tryck **+** och välj **Airport Airplay Detector**.
 2. Välj **AirPort Express** och lägg till din AirPort Express.
@@ -53,7 +65,7 @@ När testet fungerar skapar du:
 
 Valfritt skapar du ett separat flöde från **AirPlay stoppade** för önskad stopplogik.
 
-## Installera permanent
+## Installera en utvecklingsversion permanent
 
 Avsluta först `homey app run` med Ctrl+C och kör sedan:
 
@@ -61,4 +73,4 @@ Avsluta först `homey app run` med Ctrl+C och kör sedan:
 npx homey app install
 ```
 
-Den permanenta testinstallationen finns kvar när Terminal stängs. Eftersom appen inte är publicerad i Homey App Store får uppdateringar installeras från projektmappen på samma sätt.
+Den permanenta utvecklingsinstallationen finns kvar när Terminal stängs. Använd normalt App Store-versionen ovan för automatisk uppdatering.

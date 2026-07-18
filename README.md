@@ -2,6 +2,8 @@
 
 An independent Homey SDK 3 app that detects active AirPlay sessions on AirPort Express generation 2 (A1392 / AirPort10,115). It makes session state available as a device capability and as Flow cards, allowing an amplifier such as a HEOS Amp to switch to its AirPort input automatically.
 
+[Install Airport Airplay Detector from the Homey App Store](https://homey.app/a/com.anders.airport-airplay-detector)
+
 ## Features
 
 - Local discovery of AirPort Express through RAOP/mDNS
@@ -16,7 +18,11 @@ An independent Homey SDK 3 app that detects active AirPlay sessions on AirPort E
 - AirPort Express generation 2, model A1392 / AirPort10,115
 - Homey Pro and AirPort Express on a network where mDNS/Bonjour can pass
 
-## Install from source
+## Installation
+
+Install the stable release from the [Homey App Store](https://homey.app/a/com.anders.airport-airplay-detector). The app requires Homey Pro and is not available for Homey Cloud or Homey Bridge.
+
+For development or testing, install from source:
 
 ```bash
 npm install

@@ -1,5 +1,9 @@
 # Airport Airplay Detector for Homey Pro
 
+Now available in the Homey App Store:
+
+https://homey.app/a/com.anders.airport-airplay-detector
+
 I have created a local Homey Pro app for AirPort Express generation 2 (A1392). It detects when an AirPlay session connects or disconnects and makes the state available in Flow.
 
 The main use case is automatically selecting the correct input on an amplifier. For example:
@@ -19,14 +23,7 @@ Everything runs locally. No account, cloud API or external server is required. H
 
 Supported hardware: AirPort Express generation 2, model A1392 / AirPort10,115. AirPlay pause may remain active until the sending device disconnects the AirPlay session, which is intentional for amplifier input switching.
 
-Installation from source:
-
-```bash
-npm install
-npx homey login
-npx homey select
-npx homey app install
-```
+Install from the Homey App Store: https://homey.app/a/com.anders.airport-airplay-detector
 
 This is an independent community project and is not affiliated with Apple or Athom.
 
