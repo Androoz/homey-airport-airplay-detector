@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const test = require('node:test');
 const plist = require('plist');
 const {
+  ensureStatusFlagsBySource,
   isAirPlaySessionActive,
   parseTxtFlags,
 } = require('../lib/airplay-status');
@@ -23,4 +24,12 @@ test('detects the AirPort Express active-session flag', () => {
 test('parses an XML /info plist', () => {
   const value = parseAirportInfo(Buffer.from(plist.build({ statusFlags: 0x804 })));
   assert.equal(value.statusFlags, 0x804);
+});
+
+test('creates the status cache when discovery arrives before device initialization', () => {
+  const cache = ensureStatusFlagsBySource(undefined);
+  cache.mDNS = 0x804;
+
+  assert.equal(cache.mDNS, 0x804);
+  assert.equal(ensureStatusFlagsBySource(cache), cache);
 });
