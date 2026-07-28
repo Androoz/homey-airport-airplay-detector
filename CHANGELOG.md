@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 — 2026-07-28
+
+- Prevents a startup crash on Homey Pro 13.4.0 when AirPlay discovery reaches a device before its initialization has completed.
+- Adds a defensive status-cache initialization and a regression test for early discovery callbacks.
+
 ## 1.0.0 — 2026-07-18
 
 - Initial public release.

@@ -2,7 +2,11 @@
 
 const http = require('http');
 const Homey = require('homey');
-const { isAirPlaySessionActive, parseTxtFlags } = require('../../lib/airplay-status');
+const {
+  ensureStatusFlagsBySource,
+  isAirPlaySessionActive,
+  parseTxtFlags,
+} = require('../../lib/airplay-status');
 const parseAirportInfo = require('../../lib/parse-airport-info');
 
 const DEFAULT_INFO_PORT = 7000;
@@ -13,13 +17,16 @@ const INACTIVE_DELAY_MS = 8000;
 
 module.exports = class AirportExpressDevice extends Homey.Device {
   async onInit() {
+    // A Driver can already see this Device through getDevices() while Homey is
+    // still initializing it. Set all runtime state before the first await.
     this.address = this.getStoreValue('address') || null;
     this.infoPort = this.getStoreValue('infoPort') || DEFAULT_INFO_PORT;
     this.lastActiveEvidenceAt = 0;
     this.pollInProgress = false;
     this.pollErrors = 0;
-    this.lastStatusFlagsBySource = {};
+    this.lastStatusFlagsBySource = Object.create(null);
     this.hasAirPlayMdnsStatus = false;
+    this.airPlayStatusReady = true;
 
     if (this.getCapabilityValue('airplay_active') === null) {
       await this.setCapabilityValue('airplay_active', false);
@@ -70,6 +77,7 @@ module.exports = class AirportExpressDevice extends Homey.Device {
   }
 
   async handleAirPlayDiscovery(result) {
+    if (!this.isAirPlayStatusReady()) return;
     await this._updateAddress(result.address);
 
     const port = Number(result.port);
@@ -121,12 +129,20 @@ module.exports = class AirportExpressDevice extends Homey.Device {
   }
 
   async _handleStatusFlags(statusFlags, source) {
+    // Defense in depth for lifecycle changes in Homey: never assume onInit()
+    // has created the status cache before a discovery callback arrives.
+    this.lastStatusFlagsBySource = ensureStatusFlagsBySource(this.lastStatusFlagsBySource);
+
     const active = isAirPlaySessionActive(statusFlags);
     if (statusFlags !== this.lastStatusFlagsBySource[source]) {
       this.log(`${source} AirPlay statusFlags=0x${statusFlags.toString(16)} active=${active}`);
       this.lastStatusFlagsBySource[source] = statusFlags;
     }
     await this._applyStatus(active);
+  }
+
+  isAirPlayStatusReady() {
+    return this.airPlayStatusReady === true;
   }
 
   async _applyStatus(active) {

@@ -1,4 +1,8 @@
 {
+  "1.0.1": {
+    "en": "Fixes a startup crash on Homey Pro 13.4.0 caused by AirPlay discovery arriving before device initialization.",
+    "sv": "Åtgärdar en uppstartskrasch på Homey Pro 13.4.0 när AirPlay-discovery anländer innan enheten har initierats."
+  },
   "1.0.0": {
     "en": "Initial release with local AirPlay session detection for AirPort Express generation 2 and Flow triggers for session start and stop."
   }

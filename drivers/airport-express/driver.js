@@ -36,6 +36,7 @@ module.exports = class AirportExpressDriver extends Homey.Driver {
     const devices = this.getDevices();
 
     await Promise.all(devices.map(async device => {
+      if (!this._isDeviceReady(device)) return;
       const result = results.find(candidate => this._matchesAirPlayResult(device, candidate));
       if (result) await device.handleAirPlayDiscovery(result);
     }));
@@ -109,6 +110,7 @@ module.exports = class AirportExpressDriver extends Homey.Driver {
   async _routeAirPlayResult(result) {
     const devices = this.getDevices();
     await Promise.all(devices.map(async device => {
+      if (!this._isDeviceReady(device)) return;
       if (this._matchesAirPlayResult(device, result)) {
         await device.handleAirPlayDiscovery(result);
       }
@@ -125,6 +127,11 @@ module.exports = class AirportExpressDriver extends Homey.Driver {
       .replace(/[^a-f0-9]/gi, '')
       .toLowerCase();
     return raopMac.length === 12 && raopMac === airplayMac;
+  }
+
+  _isDeviceReady(device) {
+    return typeof device.isAirPlayStatusReady === 'function'
+      && device.isAirPlayStatusReady();
   }
 
   async onPairListDevices() {
